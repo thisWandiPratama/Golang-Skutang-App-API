@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"golang_api_hupiutang/dto"
 	"golang_api_hupiutang/entity"
 	"golang_api_hupiutang/helper"
@@ -46,12 +47,14 @@ func (c *authController) Login(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, response)
 		return
 	}
+	fmt.Println(authResult)
 	response := helper.BuildErrorResponse("Please check again your credential", "Invalid Credential", helper.EmptyObj{})
 	ctx.AbortWithStatusJSON(http.StatusUnauthorized, response)
 }
 
 func (c *authController) Register(ctx *gin.Context) {
 	var registerDTO dto.RegisterDTO
+	fmt.Println(registerDTO)
 	errDTO := ctx.ShouldBind(&registerDTO)
 	if errDTO != nil {
 		response := helper.BuildErrorResponse("Failed to process request", errDTO.Error(), helper.EmptyObj{})
