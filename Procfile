@@ -1,1 +1,1 @@
-web:golang_api_hupiutang
+web: golang_api_hupiutang
