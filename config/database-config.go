@@ -5,18 +5,17 @@ import (
 	"golang_api_hupiutang/entity"
 	"os"
 
-	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 // SetupDatabaseConnection
 func SetupDatabaseConnection() *gorm.DB {
-	errEnv := godotenv.Load()
+	// errEnv := godotenv.Load()
 
-	if errEnv != nil {
-		panic("Failed to load env file ")
-	}
+	// if errEnv != nil {
+	// 	panic("Failed to load env file ")
+	// }
 
 	dbUser := os.Getenv("DB_USER")
 	dbPass := os.Getenv("DB_PASS")
