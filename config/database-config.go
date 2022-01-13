@@ -5,18 +5,17 @@ import (
 	"golang_api_hupiutang/entity"
 	"os"
 
-	"github.com/joho/godotenv"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 // SetupDatabaseConnection
 func SetupDatabaseConnection() *gorm.DB {
-	errEnv := godotenv.Load()
+	// errEnv := godotenv.Load()
 
-	if errEnv != nil {
-		panic("Failed to load env file ")
-	}
+	// if errEnv != nil {
+	// 	panic("Failed to load env file ")
+	// }
 
 	dbUser := os.Getenv("DB_USER")
 	dbPass := os.Getenv("DB_PASS")
@@ -26,7 +25,7 @@ func SetupDatabaseConnection() *gorm.DB {
 
 	// dsn := fmt.Sprintf("host=%s user=%s password=%s port=%s dbname=%s sslmode=require TimeZone=Asia/Shanghai", dbHost, dbUser, dbPass, dbPort, dbName)
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbPort, dbName)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic("Failed to create a connection to database ")
