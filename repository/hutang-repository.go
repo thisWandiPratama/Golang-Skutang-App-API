@@ -34,6 +34,9 @@ func (db *hutangConnection) InsertHutang(h entity.Hutang) entity.Hutang {
 }
 
 func (db *hutangConnection) UpdateHutang(h entity.Hutang) entity.Hutang {
+	getDulu := h
+	db.connection.First(&getDulu)
+	h.CreatedAt = getDulu.UpdatedAt
 	db.connection.Save(&h)
 	fmt.Println(h.Name)
 	db.connection.Preload("User").Find(&h)

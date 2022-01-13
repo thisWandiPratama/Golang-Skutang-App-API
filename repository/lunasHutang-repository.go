@@ -31,6 +31,8 @@ func (db *lunasHutangConnection) FindLunasHutangByID(hutangID uint64) entity.Hut
 
 func (db *lunasHutangConnection) UpdateIsLunasHutang(h entity.Hutang) entity.Hutang {
 	db.connection.Preload("User").First(&h)
+	getDulu := h
+	h.CreatedAt = getDulu.UpdatedAt
 	h.IsLunas = !h.IsLunas
 	db.connection.Save(&h)
 	return h
